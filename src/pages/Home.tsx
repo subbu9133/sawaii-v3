@@ -1,158 +1,177 @@
-import React, { useRef } from 'react';
-import { Clock, MapPin, Phone, Mail, Star } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
+import { Clock, MapPin, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const heroImages = [
+    "/image copy 4.png",
+    "/image copy 5.png",
+    "/image copy 6.png"
+];
+
 const Home = () => {
-    const aboutRef = useRef<HTMLDivElement>(null);
-    const contactRef = useRef<HTMLDivElement>(null);
-    const [currentImage, setCurrentImage] = React.useState(0);
+    const heroRef = useRef(null);
+    const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+    const yHero = useTransform(scrollYProgress, [0, 1], [0, 150]);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    const heroImages = [
-        "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // Cocktails/Ambiance
-        "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // Restaurant Interior
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // Dining
-        "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"  // Bar setting
-    ];
-
-    React.useEffect(() => {
+    useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentImage((prev) => (prev + 1) % heroImages.length);
-        }, 5000);
+            setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+        }, 4000);
         return () => clearInterval(timer);
     }, []);
 
     return (
-        <>
-            <section className="relative h-screen flex items-center justify-center overflow-hidden pt-40">
-                <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <div className="bg-black text-white selection:bg-yellow-500/30">
+            <Helmet>
+                <title>SAWAII | Authentic Indian Cuisine</title>
+            </Helmet>
 
-                {/* Background Slider */}
-                {heroImages.map((img, index) => (
-                    <div
-                        key={index}
-                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${currentImage === index ? 'opacity-100' : 'opacity-0'
-                            }`}
-                    >
-                        <img
-                            src={img}
-                            alt={`Ambiance Slide ${index + 1}`}
-                            className={`w-full h-full object-cover transform transition-transform duration-[10000ms] ease-linear ${currentImage === index ? 'scale-110' : 'scale-100'
-                                }`}
+            {/* HERO SECTION - Background Slider */}
+            <section ref={heroRef} className="h-screen relative flex items-center justify-center overflow-hidden">
+                <motion.div style={{ y: yHero }} className="absolute inset-0 z-0">
+                    <AnimatePresence mode="wait">
+                        <motion.img
+                            key={currentImageIndex}
+                            src={heroImages[currentImageIndex]}
+                            alt="SAWAII Ambiance"
+                            initial={{ opacity: 0, scale: 1.1 }}
+                            animate={{ opacity: 0.7, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1.5 }}
+                            className="absolute inset-0 w-full h-full object-cover"
                         />
-                    </div>
-                ))}
+                    </AnimatePresence>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                </motion.div>
 
                 <div className="relative z-10 text-center px-4">
-                    <div className="flex items-center justify-center gap-6 mb-6">
-                        <img
-                            src="/sawaii-logo.png"
-                            alt="Sawai Restaurant Logo"
-                            className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow-2xl"
-                        />
-                        <h1 className="text-5xl md:text-7xl font-bold font-serif text-yellow-500 tracking-wider drop-shadow-lg">
-                            SAWAII
-                        </h1>
-                    </div>
-                    <p className="text-2xl md:text-3xl text-yellow-500 mb-8 font-light tracking-wide font-serif">
-                        North Indian Restaurant
-                    </p>
-                    <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                        Experience the authentic flavors of North India in an atmosphere of elegance and tradition
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link to="/menu" className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-8 py-4 rounded-full font-bold text-lg hover:from-yellow-500 hover:to-yellow-400 transition-all transform hover:scale-105 shadow-2xl">
-                            VIEW MENU
-                        </Link>
-                        <Link to="/order" className="border-2 border-yellow-500 text-yellow-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 hover:text-black transition-all transform hover:scale-105">
-                            ORDER NOW
-                        </Link>
-                        <Link to="/catering" className="border-2 border-yellow-500 text-yellow-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 hover:text-black transition-all transform hover:scale-105">
-                            CATERING
-                        </Link>
-                    </div>
-                </div>
-            </section>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1 }}
+                    >
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
+                            {/* Logo Image */}
+                            <img
+                                src="/sw-logo.png"
+                                alt="SAWAII Logo"
+                                className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-lg mix-blend-screen opacity-80"
+                            />
 
-            <section id="about" ref={aboutRef} className="py-20 bg-gradient-to-b from-black to-gray-900">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-yellow-500">About SAWAII</h2>
-                        <div className="w-24 h-1 bg-gradient-to-r from-yellow-600 to-yellow-400 mx-auto mb-8"></div>
-                        <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
-                            Established with a passion for authentic North Indian cuisine, SAWAII brings you the rich culinary heritage
-                            of India's northern regions. Our expert chefs craft each dish with traditional recipes passed down through
-                            generations, using only the finest ingredients and aromatic spices.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            { icon: <Star size={40} />, title: 'Expert Chefs', desc: 'Master chefs with decades of experience in authentic North Indian cuisine' },
-                            { icon: <Star size={40} />, title: 'Premium Quality', desc: 'Only the finest ingredients and traditional cooking methods' },
-                            { icon: <Clock size={40} />, title: 'Fresh Daily', desc: 'Everything prepared fresh daily with authentic spices' }
-                        ].map((item, idx) => (
-                            <div key={idx} className="bg-gradient-to-b from-gray-900 to-black border border-yellow-600/20 rounded-lg p-8 text-center hover:border-yellow-500/50 transition-all transform hover:scale-105">
-                                <div className="text-yellow-500 flex justify-center mb-4">{item.icon}</div>
-                                <h3 className="text-xl font-bold text-yellow-500 mb-3">{item.title}</h3>
-                                <p className="text-gray-400">{item.desc}</p>
+                            {/* Text Group */}
+                            <div className="text-center md:text-left">
+                                <h1 className="text-6xl md:text-8xl font-serif font-bold bg-gradient-to-b from-yellow-200 via-yellow-500 to-yellow-800 text-transparent bg-clip-text mb-2 tracking-widest leading-none">
+                                    SAWAII
+                                </h1>
+                                <p className="text-sm md:text-xl text-yellow-500 font-sans uppercase tracking-[0.3em] font-medium bg-gradient-to-b from-yellow-200 via-yellow-500 to-yellow-800 text-transparent bg-clip-text">
+                                    Indian Restaurant
+                                </p>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                        <Link to="/menu" className="inline-block px-8 py-3 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm">
+                            View Menu
+                        </Link>
+                        <Link to="/order" className="inline-block px-8 py-3 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm">
+                            Order Online
+                        </Link>
+                        <Link to="/catering" className="inline-block px-8 py-3 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm">
+                            Catering
+                        </Link>
+                    </motion.div>
                 </div>
             </section>
 
-            <section id="contact" ref={contactRef} className="py-20 bg-gradient-to-b from-gray-900 to-black">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-yellow-500">Contact Us</h2>
-                        <div className="w-24 h-1 bg-gradient-to-r from-yellow-600 to-yellow-400 mx-auto mb-8"></div>
-                    </div>
+            {/* WELCOME / ABOUT */}
+            <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto text-center">
+                <h2 className="text-3xl md:text-5xl font-serif mb-8 text-yellow-500">Welcome to Sawaii</h2>
+                <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed font-light">
+                    Experience the true essence of Indian hospitality. At SAWAII, we bring you recipes passed down through generations, preparing each dish with the finest spices and freshest ingredients to deliver an unforgettable dining experience.
+                </p>
+            </section>
 
-                    <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-12">
-                        <div className="space-y-6">
-                            <div className="flex items-start space-x-4">
-                                <MapPin className="text-yellow-500 flex-shrink-0 mt-1" size={24} />
-                                <div>
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Location</h3>
-                                    <p className="text-gray-300">123 Culinary Street<br />Downtown District<br />City, State 12345</p>
+            {/* FEATURED IMAGE SECTION */}
+            <section className="h-[60vh] relative overflow-hidden">
+                <img
+                    src="/image copy.png"
+                    alt="Signature Dishes"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/30" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <h3 className="text-4xl md:text-6xl font-serif text-white text-center px-4">
+                        Tradition in Every Bite
+                    </h3>
+                </div>
+            </section>
+
+            {/* INFORMATION SECTION (Address, Hours, Contact) */}
+            <section className="py-24 bg-neutral-900 border-t border-neutral-800">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid md:grid-cols-3 gap-12 text-center md:text-left">
+
+                        {/* Address */}
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-center md:justify-start gap-2 text-yellow-500 mb-2">
+                                <MapPin className="w-5 h-5" />
+                                <h4 className="text-lg font-bold uppercase tracking-widest">Location</h4>
+                            </div>
+                            <p className="text-gray-300 text-lg leading-relaxed">
+                                615 FM 2281 #100<br />
+                                Lewisville, TX 75056<br />
+                                (Sawaii Indian Restaurant)
+                            </p>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=Sawaii+Indian+Restaurant+615+FM+2281+%23100+Lewisville+TX+75056" target="_blank" rel="noreferrer" className="inline-block text-sm text-yellow-500 border-b border-yellow-500/50 hover:text-white transition-colors">
+                                Get Directions
+                            </a>
+                        </div>
+
+                        {/* Hours */}
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-center md:justify-start gap-2 text-yellow-500 mb-2">
+                                <Clock className="w-5 h-5" />
+                                <h4 className="text-lg font-bold uppercase tracking-widest">Hours</h4>
+                            </div>
+                            <div className="text-gray-300 space-y-2">
+                                <div className="flex justify-between md:justify-start gap-8 border-b border-gray-800 pb-1">
+                                    <span className="w-24">Mon - Thu</span>
+                                    <span>11:00 AM - 10:00 PM</span>
                                 </div>
-                            </div>
-
-                            <div className="flex items-start space-x-4">
-                                <Clock className="text-yellow-500 flex-shrink-0 mt-1" size={24} />
-                                <div>
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Hours</h3>
-                                    <p className="text-gray-300">
-                                        Monday - Thursday: 11:00 AM - 10:00 PM<br />
-                                        Friday - Saturday: 11:00 AM - 11:00 PM<br />
-                                        Sunday: 12:00 PM - 9:00 PM
-                                    </p>
+                                <div className="flex justify-between md:justify-start gap-8 border-b border-gray-800 pb-1">
+                                    <span className="w-24">Fri - Sat</span>
+                                    <span>11:00 AM - 11:00 PM</span>
+                                </div>
+                                <div className="flex justify-between md:justify-start gap-8">
+                                    <span className="w-24">Sunday</span>
+                                    <span>12:00 PM - 9:30 PM</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="space-y-6">
-                            <div className="flex items-start space-x-4">
-                                <Phone className="text-yellow-500 flex-shrink-0 mt-1" size={24} />
-                                <div>
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Phone</h3>
-                                    <p className="text-gray-300">(555) 123-4567</p>
-                                </div>
+                        {/* Contact */}
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-center md:justify-start gap-2 text-yellow-500 mb-2">
+                                <Phone className="w-5 h-5" />
+                                <h4 className="text-lg font-bold uppercase tracking-widest">Contact</h4>
                             </div>
-
-                            <div className="flex items-start space-x-4">
-                                <Mail className="text-yellow-500 flex-shrink-0 mt-1" size={24} />
-                                <div>
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Email</h3>
-                                    <p className="text-gray-300">info@sawairestaurant.com</p>
-                                </div>
+                            <p className="text-gray-300 text-lg">
+                                Have a question or need to book a large party?
+                            </p>
+                            <div className="space-y-2">
+                                <p className="text-xl text-white font-mono">(555) 123-4567</p>
+                                <p className="text-gray-400">info@sawaii.com</p>
                             </div>
+                            <Link to="/order" className="inline-block mt-4 px-6 py-2 bg-yellow-600 text-black text-sm font-bold uppercase tracking-widest hover:bg-yellow-500 rounded">
+                                Book Table
+                            </Link>
                         </div>
 
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     );
 };
 
