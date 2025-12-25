@@ -40,6 +40,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 Menu
                             </Link>
                             <Link
+                                to="/catering"
+                                className={`text-sm font-bold uppercase px-4 py-2 rounded-lg transition-all duration-300 ${isActive('/catering')
+                                    ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20'
+                                    : 'text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-500'
+                                    }`}
+                            >
+                                Catering
+                            </Link>
+                            <Link
                                 to="/order"
                                 className={`text-sm font-bold uppercase px-4 py-2 rounded-lg transition-all duration-300 ${isActive('/order')
                                     ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20'
