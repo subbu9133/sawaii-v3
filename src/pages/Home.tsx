@@ -66,6 +66,9 @@ const Home = () => {
                         <Link to="/order" className="border-2 border-yellow-500 text-yellow-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 hover:text-black transition-all transform hover:scale-105">
                             ORDER NOW
                         </Link>
+                        <Link to="/catering" className="border-2 border-yellow-500 text-yellow-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 hover:text-black transition-all transform hover:scale-105">
+                            CATERING
+                        </Link>
                     </div>
                 </div>
             </section>
