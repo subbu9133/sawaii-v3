@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import GreenScreenImage from '../GreenScreenImage';
 
 const GlassNavbar = () => {
     const { scrollY } = useScroll();
@@ -42,9 +43,8 @@ const GlassNavbar = () => {
                 flex items-center gap-8 shadow-2xl transition-all duration-300
                 ${scrolled ? 'bg-black/80 w-auto' : 'bg-black/40 w-[90%] max-w-5xl justify-between'}
             `}>
-                {/* Logo - Only visible when not scrolled or on mobile */}
                 <Link to="/" className={`flex items-center gap-2 ${scrolled ? 'hidden md:flex' : 'flex'}`}>
-                    <img src="/sawaii-logo.png" alt="SAWAII Logo" className="h-12 w-auto object-contain" />
+                    <GreenScreenImage src="/sawaii-green-logo.png" alt="SAWAII Logo" className="h-12 w-auto object-contain" tolerance={50} />
                 </Link>
 
                 {/* Links */}

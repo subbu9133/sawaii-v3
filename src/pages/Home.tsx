@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Clock, MapPin, Phone, Mail } from 'lucide-react';
+import { Clock, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import GreenScreenImage from '../components/GreenScreenImage';
 
 const heroImages = [
     "/image copy 4.png",
@@ -53,23 +54,13 @@ const Home = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1 }}
                     >
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-                            {/* Logo Image */}
-                            <img
-                                src="/sw-logo.png"
+                        <div className="flex justify-center mb-12">
+                            <GreenScreenImage
+                                src="/sawaii-green-logo.png"
                                 alt="SAWAII Logo"
-                                className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-lg mix-blend-screen opacity-80"
+                                className="w-full max-w-2xl object-contain drop-shadow-lg"
+                                tolerance={50}
                             />
-
-                            {/* Text Group */}
-                            <div className="text-center md:text-left">
-                                <h1 className="text-6xl md:text-8xl font-serif font-bold bg-gradient-to-b from-yellow-200 via-yellow-500 to-yellow-800 text-transparent bg-clip-text mb-2 tracking-widest leading-none">
-                                    SAWAII
-                                </h1>
-                                <p className="text-sm md:text-xl text-yellow-500 font-sans uppercase tracking-[0.3em] font-medium bg-gradient-to-b from-yellow-200 via-yellow-500 to-yellow-800 text-transparent bg-clip-text">
-                                    Indian Restaurant
-                                </p>
-                            </div>
                         </div>
                         <Link to="/menu" className="inline-block px-8 py-3 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm">
                             View Menu
