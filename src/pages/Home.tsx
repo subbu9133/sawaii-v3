@@ -1,4 +1,4 @@
-import homePoster from '../assets/home_poster.jpg';
+import homePoster from '../assets/Special Thali (A5) - 5.jpg';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {

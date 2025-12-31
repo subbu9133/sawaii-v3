@@ -127,16 +127,16 @@ const Catering = () => {
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <Mail className="text-yellow-500" />
-                                    <span className="text-white text-lg font-medium">catering@sawaillc.com</span>
+                                    <span className="text-white text-lg font-medium">priya@sawaiiusa.com</span>
                                 </div>
                             </div>
 
                             <div className="w-full h-px bg-yellow-600/20 my-8"></div>
 
-                            <div className="flex items-center justify-center space-x-2 text-gray-400">
+                            {/* <div className="flex items-center justify-center space-x-2 text-gray-400">
                                 <MapPin size={18} />
                                 <span>Serving Dallas, Houston, Midland, Odessa, and more.</span>
-                            </div>
+                            </div> */}
 
                             {/* <div className="pt-8">
                                 <Link to="/order" className="inline-block bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-8 py-3 rounded-full font-bold text-lg hover:from-yellow-500 hover:to-yellow-400 transition-all transform hover:scale-105 shadow-lg">
