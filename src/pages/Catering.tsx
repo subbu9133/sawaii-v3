@@ -85,8 +85,8 @@ const Catering = () => {
                                     />
                                 </div>
                                 <div className="p-4">
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Butter & Garlic Naan</h3>
-                                    <p className="text-gray-300 text-xs">Soft, buttery, oven-baked Indian breads.</p>
+                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Grilled Chicken</h3>
+                                    <p className="text-gray-300 text-xs">Soft, buttery, grilled chicken.</p>
                                 </div>
                             </div>
 
@@ -123,7 +123,7 @@ const Catering = () => {
                             <div className="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-12">
                                 <div className="flex items-center space-x-3">
                                     <Phone className="text-yellow-500" />
-                                    <span className="text-white text-lg font-medium">(806) 805-1443</span>
+                                    <span className="text-white text-lg font-medium">(469) 908-8686</span>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <Mail className="text-yellow-500" />
@@ -138,11 +138,11 @@ const Catering = () => {
                                 <span>Serving Dallas, Houston, Midland, Odessa, and more.</span>
                             </div>
 
-                            <div className="pt-8">
+                            {/* <div className="pt-8">
                                 <Link to="/order" className="inline-block bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-8 py-3 rounded-full font-bold text-lg hover:from-yellow-500 hover:to-yellow-400 transition-all transform hover:scale-105 shadow-lg">
                                     Book Now
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </RevealOnScroll>

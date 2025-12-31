@@ -23,9 +23,7 @@ const GlassNavbar = () => {
 
     const navLinks = [
         { name: 'Home', path: '/' },
-        { name: 'Menu', path: '/menu' },
         { name: 'Catering', path: '/catering' },
-        { name: 'Order', path: '/order' },
     ];
 
     return (
