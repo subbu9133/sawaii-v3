@@ -7,7 +7,7 @@ const Home = () => {
             <Helmet>
                 <title>SAWAII | Authentic Indian Cuisine</title>
             </Helmet>
-            <div className="max-w-4xl w-full p-20">
+            <div className="max-w-4xl w-full p-24">
                 <img
                     src={homePoster}
                     alt="Sawaii Promotional Poster"
