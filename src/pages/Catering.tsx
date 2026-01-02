@@ -1,6 +1,6 @@
-import React from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+
+import { Phone, Mail, MapPin, Star, Quote } from 'lucide-react';
+
 import { Helmet } from 'react-helmet-async';
 import HeroSlider from '../components/HeroSlider';
 import SectionHeader from '../components/SectionHeader';
@@ -34,78 +34,51 @@ const Catering = () => {
             </HeroSlider>
 
 
-            {/* Signature Dishes */}
-            <section className="py-16 bg-gradient-to-b from-gray-900 to-black">
+            {/* Testimonials Section */}
+            <section className="py-20 bg-neutral-900 border-b border-white/5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <RevealOnScroll>
                         <SectionHeader
-                            title="Signature Dishes"
+                            title="Testimonials"
+                            description="What our clients say about their SAWAII catering experience."
                         />
                     </RevealOnScroll>
 
-                    <RevealOnScroll delay={200}>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {/* Dish 1 */}
-                            <div className="bg-gray-900 border border-yellow-600/20 rounded-lg overflow-hidden hover:border-yellow-500/50 transition-all group">
-                                <div className="h-48 overflow-hidden">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                                        alt="Chicken Biryani"
-                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                    />
+                    <div className="grid md:grid-cols-3 gap-8 mt-12">
+                        {[
+                            {
+                                name: "Nirali Nahar",
+                                text: "Priya and Sawaii were absolutely incredible! The personal tasting experience was memorable, and our guests couldn't stop raving about the unique dishes like eggplant chaat and spicy guava ice cream. We wholeheartedly recommend them for any wedding!",
+                                rating: 5
+                            },
+                            {
+                                name: "Nikita Srivastava",
+                                text: "Hiring Sawaii for our multi-day wedding was our best decision! From Mehendi to Reception, the food was exceptional—guests are still raving about the eggplant chaat and hakka noodles. Priya and her team were incredibly professional, organized, and a joy to work with. Highly recommended!",
+                                rating: 5
+                            },
+                            {
+                                name: "Priya & Matt ❤️",
+                                text: "Huge thank you for everything! Everyone at our wedding wouldn't stop talking about the food. The tacos, mousse, and especially the dabeli cone were a big hit. The presentation was beyond words, and the organization was flawless. Our only regret is not eating more of your delicious food!",
+                                rating: 5
+                            }
+                        ].map((testimonial, index) => (
+                            <RevealOnScroll key={index} delay={index * 100}>
+                                <div className="bg-black/40 border border-white/5 p-8 rounded-xl h-full relative group hover:border-yellow-500/30 transition-all duration-300">
+                                    <Quote className="absolute top-6 right-6 w-8 h-8 text-white/5 group-hover:text-yellow-500/20 transition-colors" />
+                                    <div className="flex gap-1 mb-4 text-yellow-500">
+                                        {[...Array(testimonial.rating)].map((_, i) => (
+                                            <Star key={i} className="w-4 h-4 fill-current" />
+                                        ))}
+                                    </div>
+                                    <p className="text-gray-300 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+                                    <div className="mt-auto">
+                                        <h4 className="text-white font-serif font-bold tracking-wide">{testimonial.name}</h4>
+                                        {/* <p className="text-yellow-500/80 text-xs uppercase tracking-widest mt-1">{testimonial.event}</p> */}
+                                    </div>
                                 </div>
-                                <div className="p-4">
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Chicken Biryani</h3>
-                                    <p className="text-gray-300 text-xs">Fragrant basmati rice layered with tender chicken.</p>
-                                </div>
-                            </div>
-
-                            {/* Dish 2 */}
-                            <div className="bg-gray-900 border border-yellow-600/20 rounded-lg overflow-hidden hover:border-yellow-500/50 transition-all group">
-                                <div className="h-48 overflow-hidden">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                                        alt="Paneer Tikka"
-                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-4">
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Paneer Tikka</h3>
-                                    <p className="text-gray-300 text-xs">Char-grilled paneer infused with rich tandoori marinade.</p>
-                                </div>
-                            </div>
-
-                            {/* Dish 3 */}
-                            <div className="bg-gray-900 border border-yellow-600/20 rounded-lg overflow-hidden hover:border-yellow-500/50 transition-all group">
-                                <div className="h-48 overflow-hidden">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1626074353765-517a681e40be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                                        alt="Butter Naan"
-                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-4">
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Grilled Chicken</h3>
-                                    <p className="text-gray-300 text-xs">Soft, buttery, grilled chicken.</p>
-                                </div>
-                            </div>
-
-                            {/* Dish 4 */}
-                            <div className="bg-gray-900 border border-yellow-600/20 rounded-lg overflow-hidden hover:border-yellow-500/50 transition-all group">
-                                <div className="h-48 overflow-hidden">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                                        alt="Chicken 65"
-                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-4">
-                                    <h3 className="text-xl font-bold text-yellow-500 mb-2">Chicken 65</h3>
-                                    <p className="text-gray-300 text-xs">Spicy, crispy South Indian appetizer.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </RevealOnScroll>
+                            </RevealOnScroll>
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -123,7 +96,7 @@ const Catering = () => {
                             <div className="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-12">
                                 <div className="flex items-center space-x-3">
                                     <Phone className="text-yellow-500" />
-                                    <span className="text-white text-lg font-medium">(469) 908-8686</span>
+                                    <span className="text-white text-lg font-medium">+1 (469) 908-8686</span>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <Mail className="text-yellow-500" />
@@ -133,16 +106,10 @@ const Catering = () => {
 
                             <div className="w-full h-px bg-yellow-600/20 my-8"></div>
 
-                            {/* <div className="flex items-center justify-center space-x-2 text-gray-400">
+                            <div className="flex items-center justify-center space-x-2 text-gray-400">
                                 <MapPin size={18} />
-                                <span>Serving Dallas, Houston, Midland, Odessa, and more.</span>
-                            </div> */}
-
-                            {/* <div className="pt-8">
-                                <Link to="/order" className="inline-block bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-8 py-3 rounded-full font-bold text-lg hover:from-yellow-500 hover:to-yellow-400 transition-all transform hover:scale-105 shadow-lg">
-                                    Book Now
-                                </Link>
-                            </div> */}
+                                <span>Serving  DFW Metroplex and All Over USA.</span>
+                            </div>
                         </div>
                     </div>
                 </RevealOnScroll>
